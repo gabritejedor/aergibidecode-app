@@ -22,12 +22,28 @@
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
             <form class="form-inline">
+                @csrf
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar tema" aria-label="Buscar" name="buscar">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="#">login</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Registrar</a></li>
+                @if(!Auth::check())
+                <li>
+                <form method="post" action="{{ route('login') }}">
+                    @csrf
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input type="submit" name="login" value="Login">
+                </form>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="register">Registrar</a></li>
+                    @else
+                    <form method="post" action="{{ route('logout') }}">
+                        @csrf
+
+                        <input type="submit" name="logout" value="Logout">
+                    </form>
+                    @endif
             </ul>
         </div>
 
