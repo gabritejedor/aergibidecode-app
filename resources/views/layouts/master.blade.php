@@ -40,8 +40,7 @@
                     @else
                     <form method="post" action="{{ route('logout') }}">
                         @csrf
-
-                        <input type="submit" name="logout" value="Logout">
+                    <input type="submit" name="logout" value="Logout">
                     </form>
                     @endif
             </ul>
