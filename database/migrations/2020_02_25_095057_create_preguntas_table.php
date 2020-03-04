@@ -13,11 +13,11 @@ class CreatePreguntasTable extends Migration
      */
     public function up()
     {
-        Schema::create('preguntas', function (Blueprint $table) {
+        Schema::create('pregunta', function (Blueprint $table) {
             $table->Increments('id_pregunta');
             $table->bigInteger('id_user')->unsigned();
             $table->string('titulo');
-            $table->string('descripcion');
+            $table->string('descripcion',500);
             $table->date('fecha');
             $table->string('imagen');
             $table->integer('estado');
@@ -27,7 +27,7 @@ class CreatePreguntasTable extends Migration
 
 
         });
-        Schema::table('preguntas', function($table) {
+        Schema::table('pregunta', function($table) {
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
 
         });
@@ -40,6 +40,6 @@ class CreatePreguntasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preguntas');
+        Schema::dropIfExists('pregunta');
     }
 }

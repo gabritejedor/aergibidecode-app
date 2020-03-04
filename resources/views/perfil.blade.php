@@ -1,138 +1,128 @@
 @extends('layouts.master')
-@section('title','code')
+@section('title','perfil')
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2><span class="badge badge-light mb-3">Top mas vistos</span></h2>
-            </div>
+<div class="container my-5">
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <ul class="list-inline list-inline">
-                            <li class="list-inline-item border-left">Gabri</li>
-                            <li class="list-inline-item border-left">18/02/2020</li>
-                            <li class="list-inline-item border-left"><span class="badge badge-success">Likes:15</span></li>
-                            <li class="list-inline-item border-left"><span class="badge badge-danger">Views:200</span></li>
-
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
+    @endif
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Cambiar imagen de perfil</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <img width="150" height="150" src="{{Auth()->user()->imagen}}"></img>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <form enctype="multipart/form-data" method="post" action="changeImg">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="img">Inserte nueva imagen de perfil</label>
+                                    <input class="form-control" type="file" name="img" id="img">
+                                </div>
+                                <input type="submit" class="form-control btn btn-info btn-lg" name="enviar" value="Cambiar imagen"/>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <ul class="list-inline list-inline">
-                            <li class="list-inline-item border-left">Gabri</li>
-                            <li class="list-inline-item border-left">18/02/2020</li>
-                            <li class="list-inline-item border-left"><span class="badge badge-success">Likes:15</span></li>
-                            <li class="list-inline-item border-left"><span class="badge badge-danger">Views:200</span></li>
-
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                    </div>
+        <div class="col-md-4">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Cambiar contraseña</h5>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <ul class="list-inline list-inline">
-                            <li class="list-inline-item border-left">Gabri</li>
-                            <li class="list-inline-item border-left">18/02/2020</li>
-                            <li class="list-inline-item border-left"><span class="badge badge-success">Likes:15</span></li>
-                            <li class="list-inline-item border-left"><span class="badge badge-danger">Views:200</span></li>
-
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
+                <div class="card-body">
+                    <div class="row no-gutters">
+                        <div class="col text-center">
+                            <form method="post" action="changePasword">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="vieja">Inserte contraseña vieja</label>
+                                    <input class="form-control" type="password" name="vieja" id="vieja">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nueva">Inserte contraseña nueva</label>
+                                    <input class="form-control" type="password" name="nueva" id="nueva">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nueva2">Repita contraseña nueva</label>
+                                    <input class="form-control" type="password" name="nueva2" id="nueva2">
+                                </div>
+                                <input type="submit" class="form-control btn btn-info btn-lg" name="enviar" value="Cambiar contraseña"/>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2><span class="badge badge-light mb-3">Top likes</span></h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <ul class="list-inline list-inline">
-                            <li class="list-inline-item border-left">Gabri</li>
-                            <li class="list-inline-item border-left">18/02/2020</li>
-                            <li class="list-inline-item border-left"><span class="badge badge-success">Likes:15</span></li>
-                            <li class="list-inline-item border-left"><span class="badge badge-danger">Views:200</span></li>
-
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Preguntas abiertas:
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <ul class="list-inline list-inline">
-                            <li class="list-inline-item border-left">Gabri</li>
-                            <li class="list-inline-item border-left">18/02/2020</li>
-                            <li class="list-inline-item border-left"><span class="badge badge-success">Likes:15</span></li>
-                            <li class="list-inline-item border-left"><span class="badge badge-danger">Views:200</span></li>
+                <table class="card-table table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Lenguaje</th>
+                        <th scope="col">Fecha</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <ul class="list-inline list-inline">
-                            <li class="list-inline-item border-left">Gabri</li>
-                            <li class="list-inline-item border-left">18/02/2020</li>
-                            <li class="list-inline-item border-left"><span class="badge badge-success">Likes:15</span></li>
-                            <li class="list-inline-item border-left"><span class="badge badge-danger">Views:200</span></li>
+                        @foreach($preguntas as $pregunta)
+                            <tr>
+                            <td>{{$pregunta->id_pregunta}}</td>
+                            <td>{{$pregunta->titulo}}</td>
+                            <td>{{$pregunta->lenguaje}}</td>
+                            <td>{{$pregunta->fecha}}</td>
+                            </tr>
+                        @endforeach
 
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Preguntas respondidas:
+                </div>
+                <table class="card-table table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Id pregunta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($respuestas as $respuesta)
+                        <tr>
+                        <td>{{$respuesta->id_respuesta}}</td>
+                        <td>{{$respuesta->descripcion}}</td>
+                        <td>{{$respuesta->fecha}}</td>
+                        <td>{{$respuesta->id_pregunta}}</td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

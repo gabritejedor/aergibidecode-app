@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RespuestasTableSeed extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,29 +12,28 @@ class RespuestasTableSeed extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
-        for($i=0;$i<4;$i++){
+        for($i=0;$i<20;$i++){
             DB::table('users')->insert([
-                'apodo' => $faker->firstName,
+                'name' => $faker->firstName,
                 'mensajes'=>$faker->numberBetween(0,1000),
                 'agradecimientos'=>$faker->numberBetween(0,1000),
                 'email' => $faker->email,
                 'password'=>bcrypt('1234'),
                 'rol'=>0,
-                'img'=>"./default",
+                'imagen'=>"./default",
 
-            ]);
+           ]);
         }
 
 
         DB::table('users')->insert([
-            'apodo' => "gabri",
+            'name' => "gabri",
             'mensajes'=>$faker->numberBetween(0,1000),
             'agradecimientos'=>$faker->numberBetween(0,1000),
             'email' => "gabri@aergibide.com",
             'password'=>bcrypt('1234'),
             'rol'=>1,
-            'img'=>"./default",
+            'imagen'=>"./default",
 
         ]);
     }
